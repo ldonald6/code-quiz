@@ -3,13 +3,20 @@ var startButtonEl = document.getElementById("btn-start");
 var quizInfoEl = document.getElementById("quiz-info");
 var questionZone = document.getElementById("question-zone");
     questionZone.style.display = "none";
-var timeEl = 60;
-var questionIndex = 0
+var timerCount = 60;
+var questionIndex = 0;
 var questionEl = document.getElementById("question");
 var questionBtn1 = document.getElementById("btn-1");
 var questionBtn2 = document.getElementById("btn-2");
 var questionBtn3 = document.getElementById("btn-3");
 var questionBtn4 = document.getElementById("btn-4");
+questionBtn1.addEventListener("click", questionCorrect);
+questionBtn2.addEventListener("click", questionCorrect);
+questionBtn3.addEventListener("click", questionCorrect);
+questionBtn4.addEventListener("click", questionCorrect);
+var questionScore = 0;
+var answerEl = document.getElementById("answer");
+var timerObj;
 
 var questionArr = [
     {
@@ -51,6 +58,15 @@ var timerStart = function() {
 startButtonEl.addEventListener("click", function(){
     questionZone.style.display = "block";
     quizInfoEl.style.display = "none";
+    timerObj = setInterval(function() {
+        gameTimeEl.textContent = timerCount;
+        if (timerCount > 1) {
+            timerCount--;
+        }
+        else {
+            showResults();
+        }
+}, 1000)
     questionDisplay();
 });
 
@@ -62,3 +78,9 @@ function questionDisplay() {
     questionBtn4.textContent = questionArr[questionIndex].choice[3];
 
 };
+
+
+function questionCorrect(){
+    var userAnswer = this.getAttribute("data-value");
+    console.log(userAnswer);
+}
