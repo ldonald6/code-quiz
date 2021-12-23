@@ -2,7 +2,15 @@ const gameTimeEl = document.getElementById("timer");
 var startButtonEl = document.getElementById("btn-start");
 var quizInfoEl = document.getElementById("quiz-info");
 var questionZone = document.getElementById("question-zone");
+    questionZone.style.display = "none";
 var timeEl = 60;
+var questionIndex = 0
+var questionEl = document.getElementById("question");
+var questionBtn1 = document.getElementById("btn-1");
+var questionBtn2 = document.getElementById("btn-2");
+var questionBtn3 = document.getElementById("btn-3");
+var questionBtn4 = document.getElementById("btn-4");
+
 var questionArr = [
     {
         question: "What syntax is used to insert JavaScript into HTML?",
@@ -38,5 +46,19 @@ var questionArr = [
 
 var timerStart = function() {
     quizInfoEl.remove();
+
+};
+startButtonEl.addEventListener("click", function(){
+    questionZone.style.display = "block";
+    quizInfoEl.style.display = "none";
+    questionDisplay();
+});
+
+function questionDisplay() {
+    questionEl.textContent = questionArr[questionIndex].question;
+    questionBtn1.textContent = questionArr[questionIndex].choice[0];
+    questionBtn2.textContent = questionArr[questionIndex].choice[1];
+    questionBtn3.textContent = questionArr[questionIndex].choice[2];
+    questionBtn4.textContent = questionArr[questionIndex].choice[3];
 
 };
